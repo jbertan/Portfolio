@@ -11,6 +11,7 @@ module.exports = {
       pdarkgreen: "#393D3B",
       secondary: "#D9D9D9",
       primary: "#F6F5ED",
+      pteal: "#61B2E4",
     },
     screens: {
       md: "768px",
