@@ -5,7 +5,7 @@ interface text {
 }
 const Experience: React.FC<text> = (props) => {
   return (
-    <div className="w-full xl:max-w-[1440px] lg:max-w-[1024px] md:max-w-[768px] flex flex-col items-center overflow-hidden h-fit mt-20">
+    <div className="w-full  flex flex-col items-center overflow-hidden h-fit mt-20">
       <div className="top-0 md:bg-secondary w-[293px] h-[164px] md:left-[300px] lg:left-[400px] xl:left-[580px] bg-primary relative"></div>
       <h2 className="text-pblack font-bold tracking-wide text-center md:text-right top-[-100px] h-[95px] md:left-[50px] lg:left-[150px] xl:left-[250px] text-4xl max-w-[466px] font-serif relative">
         {props.title}

@@ -1,6 +1,6 @@
 const AboutMe: React.FC = () => {
   return (
-    <div className="flex flex-col items-center xl:w-[1440px] lg:w-[1024px] md:w-[768px] mt-20 h-fit overflow-hidden">
+    <div className="flex flex-col items-center xl:w-[1440px] lg:w-[1024px] md:w-[768px] ml-5 mr-5 mt-20 h-fit overflow-hidden">
       <h1 className="font-serif text-3xl text-pblack  h-[52px] relative top-[0px]">
         About Me
       </h1>
