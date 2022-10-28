@@ -1,6 +1,6 @@
 import { Poppins } from "@next/font/google";
 import "./global.css";
-import LayoutComponent from "../components/layout";
+import LayoutComponent from "../components/Layout";
 
 const poppins = Poppins({
   weight: "500",
@@ -19,6 +19,7 @@ export default function RootLayout({
       <body>
         {/*  <LayoutComponent /> */}
         <section>{children}</section>
+        <footer className="mb-10 flex justify-center">Footer</footer>
       </body>
     </html>
   );

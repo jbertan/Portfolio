@@ -1,7 +1,7 @@
 import { Fragment } from "react";
-import Experience from "../components/experience";
-import ExperienceLeft from "../components/experienceLeft";
-import AboutMe from "../components/aboutMe";
+import Experience from "../components/Experience";
+import ExperienceLeft from "../components/ExperienceLeft";
+import AboutMe from "../components/AboutMe";
 
 const Page = () => {
   return (
