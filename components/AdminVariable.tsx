@@ -16,12 +16,12 @@ const AdminVariable = (props: adminVar) => {
 
   return (
     <div className="flex justify-center items-center space-x-2">
-      <label htmlFor="Username" className="text-sm font-serif text-primary">
-        Email or UserName
+      <label htmlFor="Username" className="text-sm font-serif text-pblack">
+        Enter About Me:
       </label>
       <textarea
         className="h-8 w-48 placeholder-pdarkgreen placeholder:text-sm text-center text-pblack border-2 border-pteal"
-        placeholder="Enter Username"
+        placeholder="Enter About Me"
         ref={aboutMeInput}
       />
       <button

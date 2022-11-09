@@ -1,6 +1,5 @@
 import AdminLogin from "../../components/AdminLogin";
-import { MongoClient } from "mongodb";
-import { ConnectDatabase } from "../../components/util/ConnectDb";
+
 
 const Admin = () => {
   return (
