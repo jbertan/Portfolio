@@ -12,6 +12,7 @@ module.exports = {
       secondary: "#D9D9D9",
       primary: "#F6F5ED",
       pteal: "#61B2E4",
+      pred: "#ff0000",
     },
     screens: {
       md: "768px",
