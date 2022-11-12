@@ -19,7 +19,7 @@ export default async function RootLayout({
 }) {
   const session = await getSession(headers().get("cookie") ?? "");
   return (
-    <SessionProvider session={session}>
+    <SessionProvider>
       <html lang="en" className={poppins.className}>
         <head>
           <meta
