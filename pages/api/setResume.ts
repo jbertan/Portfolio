@@ -12,7 +12,12 @@ const SetResume = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     const resumes = db.collection("resumes");
     const result = await resumes.updateOne(
       { userName: userName },
-      { $set: { resume: req.body.resume } },
+      {
+        $set: {
+          aboutMe: req.body.resume.aboutMe,
+          experience: req.body.resume.experience,
+        },
+      },
       { upsert: true }
     );
     res.status(200).json(result);

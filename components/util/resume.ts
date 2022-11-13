@@ -1,11 +1,12 @@
+interface cv {
+  caption: string;
+  position: string;
+  description: string;
+}
 export class Resume {
   userName: string;
   aboutMe = "";
-  experience: string[] = [];
-  caption = "";
-  position = "";
-  description = "";
-
+  experience: cv[] = [];
   constructor(userName: string) {
     this.userName = userName;
   }
@@ -13,23 +14,16 @@ export class Resume {
   /**
    * name
    */
-  set setAboutMe(aboutMe: string) {
+  public setAboutMe(aboutMe: string) {
     this.aboutMe = aboutMe;
   }
-  set setExperience(exper: string) {
-    this.experience = [...this.experience, exper];
+  public addExperience(caption: string, position: string, description: string) {
+    this.experience.push({ caption, position, description });
   }
-  set setCaption(caption: string) {
-    this.caption = caption;
+  public setExperience(experience: cv[]) {
+    this.experience = experience;
   }
-  set setPosition(position: string) {
-    this.position = position;
-  }
-  set setDescription(description: string) {
-    this.description = description;
-  }
-
   get All() {
-    return this.setExperience;
+    return this.experience;
   }
 }
