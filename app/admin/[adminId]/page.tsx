@@ -1,4 +1,3 @@
-"use client";
 import AdminVariable from "../../../components/AdminVariable";
 import { Resume } from "../../../components/util/resume";
 
