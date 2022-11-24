@@ -7,6 +7,8 @@ import React, {
   useState,
 } from "react";
 import { Resume } from "../components/util/resume";
+import { cv } from "../components/util/resume";
+import AdminVariableExperience from "./AdminVariableExperience";
 
 interface adminVar {
   resume: Resume;
@@ -16,27 +18,35 @@ const AdminVariable = (props: adminVar) => {
   const resume = props.resume;
   /* const aboutMeInput = useRef<HTMLTextAreaElement>(null); */
   /* const descriptionInput = useRef<HTMLTextAreaElement>(null); */
-  const [aboutMe, setAboutMe] = useState<string>("");
+  const [prevState, setState] = useState<cv[]>([]);
+  const [aboutMe, setAboutMe] = useState<string>(resume.aboutMe);
   const [caption, setCaption] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [position, setPosition] = useState<string>("");
+  useEffect(() => {
+    setState([...resume.experience]);
+  }, [resume.experience]);
+
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     resume.setAboutMe(aboutMe);
     resume.addExperience(caption, position, description);
     console.log(resume);
     console.log(resume.experience);
-    const capt = document.getElementById("caption");
     setCaption("");
     setDescription("");
     setPosition("");
+    setState(() => [...resume.experience]);
+    saveOnGo(resume);
+    console.log("submit handler");
+  };
+  const saveOnGo = async (resume: Resume) => {
     const response = await fetch("http://localhost:3000/api/setResume", {
       method: "PUT",
       body: JSON.stringify({ resume: resume }),
       headers: { "Content-Type": "application/json" },
     });
   };
-
   const aboutMeChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     console.log(event.target.value);
     setAboutMe(event.target.value);
@@ -55,6 +65,13 @@ const AdminVariable = (props: adminVar) => {
     console.log(event.target.value);
     setDescription(() => event.target.value);
   };
+  const deleteHandler = (id: number) => {
+    resume.deleteExperience(id);
+    console.log("deleted files");
+    console.log(resume.experience);
+    setState(() => [...resume.experience]);
+    saveOnGo(resume);
+  };
   return (
     <form className="flex flex-col items-center w-full bg-primary h-fit">
       <h2 className="w-[113px] md:w-[114px] lg:w-[187px]  h-[22px] md:h-[28px] lg:h-[53px] mt-[28px] md:mt-[42px] font-serif font-normal text-[24px] lg:text-[40px]">
@@ -68,28 +85,13 @@ const AdminVariable = (props: adminVar) => {
         placeholder="Your message..."
       ></textarea>
       {/* Show Pannel of index */}
-      {resume.experience.map((exper, i) => (
-        <div
-          key={i}
-          className="w-[250px] md:w-[700px] lg:w-[950px] md:h-[400px] lg:h-[500px] flex flex-col items-center overflow-hidden h-fit mt-20 border-2 border-secondary md:border-hidden shadow-2xl md:shadow-none"
-        >
-          <div className="top-10 md:bg-secondary md:w-[700px] lg:w-[950px] h-[200px] md:h-[250px] lg:h-[287px]  md:left-[300px] lg:left-[400px]  bg-primary relative"></div>
-          <h2 className="text-pblack font-bold tracking-wide text-center md:text-right top-[-160px] md:top-[-70px] lg:top-[-120px] h-[95px] md:left-[10px] lg:left-[-100px]  text-2xl md:text-4xl font-serif relative">
-            {exper.caption}
-          </h2>
-          <h3 className="text-pblack font-medium md:top-0 top-[-150px] tracking-wide  lg:left-[350px] md:left-[250px] h-[33px] md:text-2xl text-xl font-serif relative">
-            Owner{exper.position}
-          </h3>
-          <p className="text-pblack text-center md:text-2xl text-xl font-bold tracking-wide  lg:w-[800px] md:w-[650px]  h-[153px] md:top-[58px] top-[-108px] font-serif mr-8 ml-8 md:text-left relative">
-            {exper.description}
-          </p>
-        </div>
-      ))}
+      <AdminVariableExperience cv={prevState} deleteHandler={deleteHandler} />
       {/* Blue Div */}
       <div className="w-[250px] md:w-[700px] lg:w-[950px] h-[250px] md:h-[350px] lg:h-[480px] flex flex-col mt-[30px] bg-pteal">
         {/* Button div*/}
         <div className="w-full h-[25px] flex justify-start">
           <button
+            type="submit"
             onClick={submitHandler}
             className="w-[25px] h-[25px] md:w-[45px] lg:w-[65px] md:h-[45px] lg:h-[65px] border-2 bg-primary shadow-lg shadow-pyellow"
           >

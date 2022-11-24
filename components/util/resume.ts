@@ -1,4 +1,4 @@
-interface cv {
+export interface cv {
   caption: string;
   position: string;
   description: string;
@@ -22,6 +22,9 @@ export class Resume {
   }
   public setExperience(experience: cv[]) {
     this.experience = experience;
+  }
+  public deleteExperience(id: number) {
+    this.experience.splice(id, 1);
   }
   get All() {
     return this.experience;

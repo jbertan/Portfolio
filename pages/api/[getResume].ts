@@ -15,7 +15,7 @@ const GetResume = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     res.status(200).json(result);
     client.close();
   } catch (error) {
-    res.status(401).json({ message: "shit happend" });
+    res.status(401).json({ message: "oops something happend" });
     client.close();
   }
 };

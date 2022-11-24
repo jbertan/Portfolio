@@ -1,11 +1,13 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const AdminLogin = () => {
   const { data: session, status } = useSession();
+
   const router = useRouter();
+
   const userNameInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const submitHandler = async () => {
@@ -20,10 +22,14 @@ const AdminLogin = () => {
       if (status === "authenticated") {
         console.log("we re in");
         console.log(session.user?.email);
-        router.push(`/profile/${session.user?.email}`);
       }
     }
   };
+  useEffect(() => {
+    if (session) {
+      router.push(`/admin/${session.user?.email}`);
+    }
+  }, [session]);
 
   return (
     <div className="w-full h-fit flex flex-col justify-center items-center space-y-2">

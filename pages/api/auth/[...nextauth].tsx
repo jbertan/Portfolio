@@ -1,9 +1,13 @@
 import NextAuth from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { ConnectDatabase } from "../../../components/util/ConnectDb";
 import { comparePassword } from "../../../components/util/Hash";
-
-export default NextAuth({
+interface data1 {
+  userName: string;
+  password: string;
+}
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       secret: process.env.SECRET,
@@ -45,7 +49,12 @@ export default NextAuth({
         username: { label: "Username", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       }, */
-      async authorize(credentials: { userName: string; password: string }) {
+
+      // @ts-ignore
+      async authorize(
+        credentials: { userName: string; password: string },
+        req: any
+      ) {
         const { userName, password } = credentials;
         const client = await ConnectDatabase();
         const db = client.db("profile");
@@ -63,4 +72,6 @@ export default NextAuth({
       },
     }),
   ],
-});
+};
+
+export default NextAuth(authOptions);
